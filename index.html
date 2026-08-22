@@ -1,0 +1,5984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GRANDMA'S PAGE</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: #f5eee0;
+    color: #30251e;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    overflow-x: hidden;
+}
+
+button,
+a {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+::selection {
+    background: #d00000;
+    color: white;
+}
+
+
+/* =========================================================
+   ABSTRACT BACKGROUND
+========================================================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(214,35,35,.42),
+            transparent 18%
+        ),
+        radial-gradient(
+            circle at 85% 25%,
+            rgba(255,204,100,.5),
+            transparent 22%
+        ),
+        radial-gradient(
+            circle at 50% 90%,
+            rgba(152,22,22,.42),
+            transparent 30%
+        ),
+        linear-gradient(
+            120deg,
+            #f7c17c 0%,
+            #f8d79c 25%,
+            #f6e6b9 50%,
+            #d9c98c 75%,
+            #9ca76b 100%
+        );
+
+    opacity: .97;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -9;
+
+    background:
+        repeating-linear-gradient(
+            13deg,
+            transparent 0px,
+            transparent 21px,
+            rgba(104,63,42,.055) 22px,
+            transparent 25px
+        ),
+        radial-gradient(
+            ellipse at 20% 70%,
+            rgba(255,255,255,.55),
+            transparent 30%
+        ),
+        radial-gradient(
+            ellipse at 75% 35%,
+            rgba(255,70,50,.22),
+            transparent 35%
+        ),
+        radial-gradient(
+            ellipse at 50% 100%,
+            rgba(88,101,53,.3),
+            transparent 45%
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   GLITTER FIELD
+========================================================= */
+
+.sparkle {
+    position: fixed;
+    z-index: -2;
+
+    color: #b90000;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-weight: bold;
+
+    pointer-events: none;
+
+    animation:
+        sparkleFloat
+        var(--speed)
+        ease-in-out
+        infinite;
+}
+
+.sparkle:nth-child(1) {
+    top: 8%;
+    left: 8%;
+    --speed: 2.4s;
+}
+
+.sparkle:nth-child(2) {
+    top: 20%;
+    right: 13%;
+    --speed: 3s;
+}
+
+.sparkle:nth-child(3) {
+    top: 42%;
+    left: 4%;
+    --speed: 2.1s;
+}
+
+.sparkle:nth-child(4) {
+    top: 62%;
+    right: 6%;
+    --speed: 2.8s;
+}
+
+.sparkle:nth-child(5) {
+    top: 83%;
+    left: 13%;
+    --speed: 2.6s;
+}
+
+.sparkle:nth-child(6) {
+    top: 91%;
+    right: 20%;
+    --speed: 3.4s;
+}
+
+.sparkle:nth-child(7) {
+    top: 35%;
+    right: 35%;
+    --speed: 2.2s;
+}
+
+.sparkle:nth-child(8) {
+    top: 75%;
+    left: 45%;
+    --speed: 3.1s;
+}
+
+.sparkle:nth-child(9) {
+    top: 5%;
+    right: 40%;
+    --speed: 2.9s;
+}
+
+.sparkle:nth-child(10) {
+    top: 55%;
+    left: 25%;
+    --speed: 2.3s;
+}
+
+.sparkle:nth-child(11) {
+    top: 68%;
+    right: 45%;
+    --speed: 3.2s;
+}
+
+.sparkle:nth-child(12) {
+    top: 15%;
+    left: 50%;
+    --speed: 2.7s;
+}
+
+.sparkle:nth-child(13) {
+    top: 88%;
+    right: 8%;
+    --speed: 2.5s;
+}
+
+.sparkle:nth-child(14) {
+    top: 30%;
+    left: 60%;
+    --speed: 3.6s;
+}
+
+@keyframes sparkleFloat {
+
+    0%,
+    100% {
+        opacity: .2;
+        transform:
+            scale(.7)
+            rotate(0deg);
+    }
+
+    50% {
+        opacity: 1;
+        transform:
+            scale(1.5)
+            rotate(25deg);
+
+        text-shadow:
+            0 0 5px #ff4a4a,
+            0 0 14px #ff1717;
+    }
+}
+
+
+/* =========================================================
+   RANDOM GRANDMA POPUPS
+========================================================= */
+
+.grandma-popup {
+    position: fixed;
+
+    width: 250px;
+    max-width: calc(100vw - 30px);
+
+    z-index: 5000;
+
+    background: #fff8e8;
+
+    border: 4px solid #403129;
+
+    box-shadow:
+        7px 7px 0 #b40000,
+        0 0 0 2px rgba(255,255,255,.8);
+
+    color: #342820;
+
+    font:
+        13px
+        "Courier New",
+        monospace;
+
+    transform:
+        rotate(var(--popup-rotation))
+        scale(0);
+
+    opacity: 0;
+
+    animation:
+        popupAppear
+        .25s
+        ease-out
+        forwards;
+}
+
+.grandma-popup.closing {
+    animation:
+        popupDisappear
+        .2s
+        ease-in
+        forwards;
+}
+
+.popup-title {
+    display: flex;
+    align-items: center;
+
+    padding: 6px 8px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #b40000,
+            #d43a29
+        );
+
+    color: white;
+
+    border-bottom: 3px solid #403129;
+
+    font-weight: bold;
+}
+
+.popup-title-text {
+    flex: 1;
+}
+
+.popup-close {
+    width: 21px;
+    height: 19px;
+
+    padding: 0;
+
+    background: #fff8e8;
+
+    color: #403129;
+
+    border: 2px outset #fff;
+
+    font:
+        bold 11px
+        "Courier New",
+        monospace;
+
+    line-height: 14px;
+}
+
+.popup-close:hover {
+    background: #d00000;
+    color: white;
+}
+
+.popup-body {
+    padding: 12px;
+
+    line-height: 1.45;
+
+    background:
+        radial-gradient(
+            circle at 90% 10%,
+            rgba(190,0,0,.12),
+            transparent 35%
+        ),
+        #fff8e8;
+}
+
+.popup-body::before {
+    content: "✦ ";
+
+    color: #b40000;
+
+    font-weight: bold;
+}
+
+.popup-tag {
+    margin-top: 8px;
+
+    color: #b40000;
+
+    font-size: 10px;
+}
+
+@keyframes popupAppear {
+
+    0% {
+        opacity: 0;
+        transform:
+            rotate(var(--popup-rotation))
+            scale(.65)
+            translateY(12px);
+    }
+
+    70% {
+        transform:
+            rotate(var(--popup-rotation))
+            scale(1.04);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            rotate(var(--popup-rotation))
+            scale(1);
+    }
+}
+
+@keyframes popupDisappear {
+
+    from {
+        opacity: 1;
+        transform:
+            rotate(var(--popup-rotation))
+            scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform:
+            rotate(var(--popup-rotation))
+            scale(.7)
+            translateY(10px);
+    }
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page {
+    width: 1100px;
+    max-width: 94%;
+    margin: 35px auto 80px;
+}
+
+
+/* =========================================================
+   BROWSER
+========================================================= */
+
+.browser {
+    background: #eee6d5;
+    border: 4px ridge #ffffff;
+
+    box-shadow:
+        10px 12px 0 rgba(87,57,43,.4),
+        0 0 35px rgba(105,65,38,.25),
+        0 0 0 5px rgba(170,0,0,.15);
+
+    overflow: hidden;
+
+    transform:
+        rotate(-.15deg);
+}
+
+.browser-top {
+    min-height: 34px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 5px 9px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #fff9eb,
+            #d6cbb8
+        );
+
+    border-bottom: 2px solid #8d8171;
+
+    color: #342a23;
+
+    font:
+        bold 12px
+        "Courier New",
+        monospace;
+}
+
+.browser-title {
+    flex: 1;
+}
+
+.browser-buttons {
+    display: flex;
+    gap: 4px;
+}
+
+.browser-buttons span {
+    width: 21px;
+    height: 19px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eee;
+
+    border: 2px outset #aaa;
+
+    font-size: 10px;
+}
+
+.address {
+    padding: 6px 8px;
+
+    background: #d7ccb9;
+
+    color: #45392f;
+
+    font:
+        11px
+        "Courier New",
+        monospace;
+}
+
+.address-bar {
+    display: inline-block;
+
+    width: 84%;
+
+    padding: 5px 8px;
+
+    background: #fffdf6;
+
+    border: 2px inset #999;
+
+    color: #342a23;
+}
+
+
+/* =========================================================
+   SITE
+========================================================= */
+
+.site {
+    position: relative;
+
+    padding: 12px;
+
+    background:
+        rgba(255,248,232,.72);
+
+    overflow: hidden;
+}
+
+.site::before {
+    content: "✦   ★   ✧   ✦   ★";
+
+    position: absolute;
+
+    top: 5px;
+    right: 25px;
+
+    z-index: 2;
+
+    color: #c00000;
+
+    font:
+        bold 16px
+        "Courier New",
+        monospace;
+
+    opacity: .65;
+
+    transform:
+        rotate(3deg);
+
+    animation:
+        decorWobble
+        3s
+        ease-in-out
+        infinite;
+}
+
+.site::after {
+    content: "";
+
+    position: absolute;
+
+    width: 250px;
+    height: 55px;
+
+    right: -60px;
+    top: 160px;
+
+    background: #bd1717;
+
+    opacity: .12;
+
+    transform:
+        rotate(17deg)
+        skewX(-25deg);
+
+    pointer-events: none;
+}
+
+@keyframes decorWobble {
+
+    0%,
+    100% {
+        transform:
+            rotate(3deg)
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            rotate(-5deg)
+            translateY(-5px);
+    }
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+    position: relative;
+
+    min-height: 340px;
+
+    overflow: hidden;
+
+    border: 5px ridge #fff8e9;
+
+    background: #f5c27f;
+
+    box-shadow:
+        inset 0 0 0 5px rgba(68,48,32,.7),
+        8px 8px 0 rgba(177,0,0,.28);
+
+    transform:
+        rotate(.25deg);
+}
+
+.header-gif {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: .88;
+
+    filter:
+        saturate(125%)
+        contrast(98%);
+}
+
+.header-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to right,
+            rgba(255,246,220,.8),
+            rgba(255,218,164,.18),
+            rgba(199,35,35,.3)
+        );
+}
+
+.header::after {
+    content: "♥ ✦ ♥ ✦ ♥";
+
+    position: absolute;
+
+    right: 20px;
+    bottom: 15px;
+
+    color: rgba(164,0,0,.75);
+
+    font:
+        bold 18px
+        "Courier New",
+        monospace;
+
+    transform:
+        rotate(-7deg);
+}
+
+.header-text {
+    position: relative;
+
+    z-index: 3;
+
+    width: 65%;
+
+    padding: 65px 30px 40px;
+}
+
+.header-small {
+    display: inline-block;
+
+    padding: 5px 9px;
+
+    background: rgba(255,248,226,.9);
+
+    border: 2px solid #49372c;
+
+    font:
+        bold 12px
+        "Courier New",
+        monospace;
+
+    letter-spacing: 2px;
+}
+
+.header h1 {
+    margin: 14px 0 0;
+
+    font:
+        bold italic 82px
+        Georgia,
+        serif;
+
+    line-height: .8;
+
+    color: #382820;
+
+    text-shadow:
+        5px 5px 0 rgba(255,247,213,.8),
+        9px 9px 0 rgba(174,0,0,.18);
+}
+
+.header-name {
+    margin-top: 25px;
+
+    font:
+        bold 14px
+        "Courier New",
+        monospace;
+
+    letter-spacing: 4px;
+
+    color: #4b3428;
+}
+
+.header-red-text {
+    display: inline-block;
+
+    margin-top: 25px;
+
+    padding: 7px 11px;
+
+    background: #b40000;
+
+    color: white;
+
+    font:
+        bold 13px
+        "Courier New",
+        monospace;
+
+    transform:
+        rotate(-2deg);
+}
+
+
+/* =========================================================
+   NAV
+========================================================= */
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+
+    margin: 9px 0;
+    padding: 8px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #9f0000,
+            #cf3125,
+            #8e0000
+        );
+
+    border: 3px ridge #fff7e7;
+
+    box-shadow:
+        5px 5px 0 rgba(100,0,0,.25);
+
+    transform:
+        rotate(-.35deg);
+}
+
+.nav a {
+    padding: 8px 14px;
+
+    background: #fff8e9;
+
+    color: #49352a;
+
+    border: 2px outset #c9bba6;
+
+    font:
+        bold 12px
+        "Courier New",
+        monospace;
+
+    text-decoration: none;
+}
+
+.nav a:hover {
+    background: #d60000;
+    color: white;
+
+    transform:
+        rotate(-2deg);
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content {
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    gap: 10px;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+    align-self: start;
+
+    padding: 8px;
+
+    background: rgba(250,242,223,.9);
+
+    border: 4px ridge #fff;
+
+    box-shadow:
+        5px 6px 0 rgba(89,65,46,.25),
+        -4px 4px 0 rgba(173,0,0,.15);
+
+    transform:
+        rotate(.5deg);
+}
+
+.sidebar-box {
+    margin-bottom: 9px;
+
+    background: #fffaf0;
+
+    border: 3px solid #514035;
+}
+
+.sidebar-title {
+    padding: 8px;
+
+    background: #d9b66e;
+
+    border-bottom: 4px solid #b40000;
+
+    color: #352920;
+
+    font:
+        bold 12px
+        "Courier New",
+        monospace;
+}
+
+.sidebar-content {
+    padding: 10px;
+
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.profile {
+    display: block;
+
+    width: 155px;
+    height: 155px;
+
+    margin: 3px auto 12px;
+
+    object-fit: cover;
+
+    border: 6px solid #514035;
+
+    transform: rotate(-2deg);
+
+    filter:
+        saturate(80%)
+        contrast(92%);
+}
+
+.profile-name {
+    text-align: center;
+
+    font:
+        bold 20px
+        Georgia,
+        serif;
+}
+
+.profile-alias {
+    text-align: center;
+
+    color: #b40000;
+
+    font:
+        11px
+        "Courier New",
+        monospace;
+}
+
+.status {
+    margin-top: 11px;
+
+    padding: 7px;
+
+    background: #e7d9bb;
+
+    border: 3px inset #958875;
+
+    font:
+        bold 11px
+        "Courier New",
+        monospace;
+}
+
+.status::before {
+    content: "● ";
+
+    color: #d00000;
+
+    animation:
+        statusBlink
+        .8s
+        steps(2)
+        infinite;
+}
+
+@keyframes statusBlink {
+
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .2;
+    }
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 15px;
+
+    background: rgba(250,244,229,.93);
+
+    border: 4px ridge white;
+
+    color: #342820;
+}
+
+.main::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: .14;
+
+    background:
+        repeating-linear-gradient(
+            11deg,
+            transparent 0 11px,
+            rgba(119,87,59,.5) 12px,
+            transparent 14px
+        );
+}
+
+
+/* =========================================================
+   VISUAL NOVEL
+========================================================= */
+
+.visual-novel {
+    position: relative;
+    z-index: 4;
+
+    padding: 13px;
+
+    background: rgba(255,249,235,.95);
+
+    border: 4px solid #403129;
+
+    box-shadow:
+        9px 8px 0 #a90000,
+        -4px -4px 0 rgba(210,0,0,.15);
+
+    transform:
+        rotate(-.3deg);
+}
+
+.vn-character-area {
+    position: relative;
+
+    min-height: 430px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(255,255,255,.8),
+            transparent 50%
+        ),
+        linear-gradient(
+            to bottom,
+            rgba(255,222,165,.28),
+            rgba(255,250,232,.8)
+        );
+
+    border: 3px solid #a99472;
+}
+
+
+/* =========================================================
+   GRANDMA SPRITE
+========================================================= */
+
+.grandma-sprite {
+    position: relative;
+
+    z-index: 5;
+
+    display: block;
+
+    width: 600px;
+    height: 600px;
+
+    max-width: 82%;
+    max-height: 600px;
+
+    object-fit: contain;
+
+    object-position: center bottom;
+
+    margin-bottom: -60px;
+
+    user-select: none;
+
+    pointer-events: none;
+
+    filter:
+        saturate(105%)
+        contrast(103%)
+        drop-shadow(
+            8px 8px 0 rgba(90,0,0,.2)
+        );
+
+    transform:
+        rotate(-1deg);
+
+    transition:
+        opacity .08s ease,
+        transform .15s ease;
+
+    animation:
+        grandmaFloat
+        3.5s
+        ease-in-out
+        infinite;
+}
+
+.grandma-sprite.talking {
+    transform:
+        rotate(1deg)
+        scale(1.015);
+
+    filter:
+        saturate(120%)
+        contrast(105%)
+        drop-shadow(
+            10px 10px 0 rgba(130,0,0,.25)
+        );
+}
+
+@keyframes grandmaFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(-1deg);
+    }
+
+    50% {
+        transform:
+            translateY(-7px)
+            rotate(1deg);
+    }
+}
+
+
+/* =========================================================
+   GRANDMA GLITTER
+========================================================= */
+
+.grandma-glitter {
+    position: absolute;
+
+    z-index: 7;
+
+    pointer-events: none;
+
+    color: #bd0000;
+
+    font:
+        bold 24px
+        "Courier New",
+        monospace;
+
+    animation:
+        grandmaSparkle
+        1.8s
+        ease-in-out
+        infinite;
+}
+
+.grandma-glitter.g1 {
+    left: 18%;
+    top: 18%;
+}
+
+.grandma-glitter.g2 {
+    right: 22%;
+    top: 24%;
+
+    animation-delay: .4s;
+}
+
+.grandma-glitter.g3 {
+    left: 27%;
+    top: 48%;
+
+    animation-delay: .9s;
+}
+
+.grandma-glitter.g4 {
+    right: 27%;
+    top: 51%;
+
+    animation-delay: .2s;
+}
+
+.grandma-glitter.g5 {
+    left: 40%;
+    top: 12%;
+
+    animation-delay: .6s;
+}
+
+.grandma-glitter.g6 {
+    right: 40%;
+    bottom: 8%;
+
+    animation-delay: 1.1s;
+}
+
+@keyframes grandmaSparkle {
+
+    0%,
+    100% {
+        opacity: .15;
+
+        transform:
+            scale(.6)
+            rotate(0deg);
+    }
+
+    50% {
+        opacity: 1;
+
+        transform:
+            scale(1.35)
+            rotate(20deg);
+
+        text-shadow:
+            0 0 8px white,
+            0 0 15px #ff0000;
+    }
+}
+
+
+/* =========================================================
+   CURSOR TRAIL
+========================================================= */
+
+.cursor-spark {
+    position: fixed;
+
+    z-index: 100000;
+
+    pointer-events: none;
+
+    color: #b90000;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-weight: bold;
+    font-size: 14px;
+
+    opacity: 1;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1);
+
+    transition:
+        opacity .6s ease,
+        transform .6s ease;
+
+    will-change:
+        opacity,
+        transform;
+}
+
+.cursor-spark.fade {
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        scale(.3)
+        translateY(-10px);
+}
+
+
+/* =========================================================
+   ANGRY SHAKE
+========================================================= */
+
+@keyframes angryShake {
+
+    from {
+        transform:
+            translateX(-2px)
+            rotate(-.3deg);
+    }
+
+    to {
+        transform:
+            translateX(2px)
+            rotate(.3deg);
+    }
+}
+
+.vn-character-area.angry-shake {
+    animation:
+        angryShake
+        .15s
+        infinite alternate;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(255,80,80,.4),
+            transparent 60%
+        ),
+        linear-gradient(
+            to bottom,
+            rgba(255,100,80,.35),
+            rgba(255,250,232,.8)
+        );
+}
+
+.dialogue-box.angry-shake {
+    animation:
+        angryShake
+        .12s
+        infinite alternate;
+
+    border-color: #7a0000;
+
+    box-shadow:
+        6px 6px 0 #7a0000;
+}
+
+
+/* =========================================================
+   MOOD POPUP VARIANTS
+========================================================= */
+
+.grandma-popup.mood-angry {
+    box-shadow:
+        7px 7px 0 #7a0000,
+        0 0 0 2px rgba(255,255,255,.8);
+}
+
+.grandma-popup.mood-angry .popup-title {
+    background:
+        linear-gradient(
+            90deg,
+            #7a0000,
+            #b40000
+        );
+}
+
+.grandma-popup.mood-sleepy {
+    box-shadow:
+        7px 7px 0 #6a5a8a,
+        0 0 0 2px rgba(255,255,255,.8);
+}
+
+.grandma-popup.mood-sleepy .popup-title {
+    background:
+        linear-gradient(
+            90deg,
+            #6a5a8a,
+            #8a7ab0
+        );
+}
+
+.grandma-popup.mood-feral {
+    box-shadow:
+        7px 7px 0 #111,
+        0 0 0 2px rgba(255,0,0,.4);
+}
+
+.grandma-popup.mood-feral .popup-title {
+    background:
+        linear-gradient(
+            90deg,
+            #111,
+            #b40000
+        );
+}
+
+.grandma-popup.mood-confused .popup-title {
+    background:
+        linear-gradient(
+            90deg,
+            #a67c00,
+            #d4a72c
+        );
+}
+
+
+/* =========================================================
+   OC YEARBOOK
+========================================================= */
+
+.yearbook {
+    margin-top: 13px;
+
+    padding: 16px;
+
+    background: #fff9ed;
+
+    border: 4px solid #403129;
+}
+
+.yearbook-grid {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 16px;
+
+    margin-top: 10px;
+
+    justify-content: center;
+}
+
+.yearbook-card {
+    position: relative;
+
+    width: 160px;
+
+    padding: 10px 10px 14px;
+
+    background: #fffaf0;
+
+    border: 3px solid #514035;
+
+    box-shadow:
+        4px 4px 0 rgba(180,0,0,.18);
+
+    text-align: center;
+
+    transform:
+        rotate(var(--yb-rotation, 0deg));
+}
+
+.yearbook-card:nth-child(1) {
+    --yb-rotation: -2deg;
+}
+
+.yearbook-card:nth-child(2) {
+    --yb-rotation: 1.5deg;
+}
+
+.yearbook-card:nth-child(3) {
+    --yb-rotation: -1deg;
+}
+
+.yearbook-photo {
+    width: 100%;
+    height: 160px;
+
+    object-fit: cover;
+
+    border: 4px solid #403129;
+
+    filter:
+        saturate(85%)
+        contrast(95%)
+        sepia(8%);
+}
+
+.yearbook-name {
+    margin-top: 9px;
+
+    font:
+        bold 14px
+        Georgia,
+        serif;
+}
+
+.yearbook-caption {
+    display: none;
+
+    margin-top: 6px;
+
+    padding: 6px;
+
+    background: #ead7a9;
+
+    border-left: 4px solid #b40000;
+
+    font:
+        11px
+        "Courier New",
+        monospace;
+
+    line-height: 1.4;
+
+    text-align: left;
+}
+
+.yearbook-card:hover .yearbook-caption {
+    display: block;
+}
+
+
+/* =========================================================
+   ACHIEVEMENTS
+========================================================= */
+
+.achievements-tab {
+    position: fixed;
+
+    left: 22px;
+    bottom: 22px;
+
+    z-index: 5000;
+
+    padding: 10px 15px;
+
+    background: #403129;
+
+    color: #e6c879;
+
+    border: 3px outset #fff;
+
+    font:
+        bold 11px
+        "Courier New",
+        monospace;
+}
+
+.achievements-tab:hover {
+    background: #c00000;
+    color: white;
+}
+
+.achievements-panel {
+    display: none;
+
+    position: fixed;
+
+    left: 22px;
+    bottom: 65px;
+
+    z-index: 5000;
+
+    width: 250px;
+    max-height: 60vh;
+
+    overflow-y: auto;
+
+    background: #fff8e8;
+
+    border: 4px solid #403129;
+
+    box-shadow:
+        6px 6px 0 rgba(76,53,38,.35);
+
+    font:
+        12px
+        "Courier New",
+        monospace;
+}
+
+.achievements-panel.show {
+    display: block;
+}
+
+.achievements-panel-title {
+    padding: 8px;
+
+    background: #b40000;
+
+    color: white;
+
+    font-weight: bold;
+
+    border-bottom: 3px solid #403129;
+}
+
+.achievement-item {
+    display: flex;
+    gap: 8px;
+
+    padding: 8px;
+
+    border-bottom: 1px solid #d0c0a6;
+
+    opacity: .4;
+}
+
+.achievement-item.unlocked {
+    opacity: 1;
+
+    background: rgba(180,0,0,.06);
+}
+
+.achievement-icon {
+    flex-shrink: 0;
+}
+
+.achievement-toast {
+    position: fixed;
+
+    left: 50%;
+    top: 20px;
+
+    transform:
+        translateX(-50%)
+        translateY(-30px);
+
+    z-index: 6000;
+
+    padding: 10px 16px;
+
+    background: #403129;
+
+    color: #e6c879;
+
+    border: 3px solid #b40000;
+
+    font:
+        bold 12px
+        "Courier New",
+        monospace;
+
+    opacity: 0;
+
+    transition:
+        opacity .3s ease,
+        transform .3s ease;
+
+    pointer-events: none;
+}
+
+.achievement-toast.show {
+    opacity: 1;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+
+/* =========================================================
+   INVENTORY
+========================================================= */
+
+.inventory {
+    position: absolute;
+
+    right: 13px;
+    bottom: 13px;
+
+    width: 190px;
+
+    padding: 8px;
+
+    background: rgba(255,250,235,.97);
+
+    border: 4px solid #403129;
+
+    box-shadow:
+        4px 4px 0 rgba(76,53,38,.35);
+
+    font:
+        12px
+        "Courier New",
+        monospace;
+
+    z-index: 8;
+}
+
+.inventory-title {
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+
+    border-bottom: 2px solid #b40000;
+
+    font-weight: bold;
+}
+
+.inventory-item {
+    padding: 7px;
+
+    background: #eee2c6;
+
+    margin-top: 4px;
+
+    border: 2px outset #fff8e9;
+
+    cursor: pointer;
+}
+
+.inventory-item:hover {
+    background: #d4bb76;
+}
+
+.inventory-item.active {
+    background: #c00000;
+    color: white;
+}
+
+.inventory-description {
+    display: none;
+
+    margin-top: 7px;
+
+    padding: 9px;
+
+    background: #fffaf0;
+
+    border: 3px solid #403129;
+
+    color: #403026;
+
+    font:
+        bold 12px
+        "Courier New",
+        monospace;
+
+    line-height: 1.45;
+}
+
+.inventory-description.show {
+    display: block;
+}
+
+
+/* =========================================================
+   DIALOGUE
+========================================================= */
+
+.dialogue-box {
+    margin-top: 12px;
+
+    padding: 15px;
+
+    background: #fffaf0;
+
+    border: 5px solid #403129;
+
+    box-shadow:
+        6px 6px 0 #c00000;
+}
+
+.dialogue-name {
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    padding: 5px 10px;
+
+    background: #b40000;
+
+    color: white;
+
+    font:
+        bold 15px
+        "Courier New",
+        monospace;
+
+    animation:
+        nameBlink
+        2.3s
+        steps(2)
+        infinite;
+}
+
+@keyframes nameBlink {
+
+    0%,
+    80% {
+        background: #b40000;
+    }
+
+    81%,
+    90% {
+        background: #d70000;
+    }
+
+    91%,
+    100% {
+        background: #b40000;
+    }
+}
+
+.dialogue-text {
+    min-height: 75px;
+
+    font:
+        19px
+        Georgia,
+        serif;
+
+    line-height: 1.55;
+}
+
+.dialogue-text.angry {
+    color: #9d3527;
+
+    text-shadow:
+        1px 1px 0 rgba(190,0,0,.2);
+}
+
+.dialogue-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+
+    margin-top: 12px;
+}
+
+.topic-button {
+    padding: 9px 14px;
+
+    background: #e5c982;
+
+    color: #39291f;
+
+    border: 3px outset #fff4d8;
+
+    font:
+        bold 12px
+        "Courier New",
+        monospace;
+}
+
+.topic-button:hover {
+    background: #c90000;
+    color: white;
+
+    transform:
+        rotate(-2deg);
+}
+
+.topic-button:active {
+    border-style: inset;
+}
+
+.topic-button.secret-topic {
+    background: #292929;
+    color: white;
+}
+
+.topic-button.secret-topic:hover {
+    background: #111;
+    color: #e6c879;
+}
+
+
+/* =========================================================
+   NOTE
+========================================================= */
+
+.grandma-note {
+    margin-top: 12px;
+
+    padding: 10px 14px;
+
+    background: #ead7a9;
+
+    border-left: 7px solid #b40000;
+
+    color: #403026;
+
+    font:
+        bold 14px
+        "Courier New",
+        monospace;
+
+    transform:
+        rotate(.4deg);
+}
+
+
+/* =========================================================
+   PAINT
+========================================================= */
+
+.paint {
+    position: relative;
+
+    z-index: 2;
+
+    height: 42px;
+
+    margin: 28px -20px 22px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #d5a45f,
+            #e4bd73,
+            #bd1717,
+            #d5a45f
+        );
+
+    transform:
+        rotate(-1deg)
+        skewX(-7deg);
+
+    opacity: .9;
+
+    box-shadow:
+        0 8px 0 rgba(160,0,0,.15);
+}
+
+.paint::after {
+    content:
+        "✦ ✧ ✦ ✧ ✦ ✧ ✦";
+
+    position: absolute;
+
+    top: 8px;
+    left: 15px;
+
+    color: rgba(255,255,255,.75);
+
+    font:
+        bold 17px
+        "Courier New",
+        monospace;
+
+    animation:
+        paintSparkles
+        2s
+        linear
+        infinite;
+}
+
+@keyframes paintSparkles {
+
+    0% {
+        transform:
+            translateX(-20px);
+    }
+
+    100% {
+        transform:
+            translateX(500px);
+    }
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.section {
+    position: relative;
+    z-index: 3;
+
+    margin-top: 28px;
+}
+
+.section-title {
+    display: inline-block;
+
+    padding: 7px 15px;
+
+    background: #403129;
+
+    color: #fff5df;
+
+    border-left: 13px solid #b40000;
+
+    font:
+        bold italic 25px
+        Georgia,
+        serif;
+
+    transform:
+        rotate(-1deg);
+
+    box-shadow:
+        5px 5px 0 rgba(180,0,0,.18);
+}
+
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.info {
+    margin-top: 12px;
+
+    background: #fff9ed;
+
+    border: 4px solid #403129;
+}
+
+.info-row {
+    display: grid;
+
+    grid-template-columns: 130px 1fr;
+
+    border-bottom: 2px solid #d0c0a6;
+}
+
+.info-label {
+    padding: 10px;
+
+    background: #d7b76d;
+
+    font:
+        bold 11px
+        "Courier New",
+        monospace;
+}
+
+.info-value {
+    padding: 10px;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   INTERESTS
+========================================================= */
+
+.interests {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 13px;
+}
+
+.interest {
+    padding: 10px 13px;
+
+    background: #fff7e5;
+
+    border: 3px solid #514035;
+
+    font:
+        bold 11px
+        "Courier New",
+        monospace;
+
+    transform:
+        rotate(var(--rotation));
+
+    box-shadow:
+        3px 3px 0 rgba(180,0,0,.15);
+}
+
+.interest:nth-child(1) {
+    --rotation: -2deg;
+}
+
+.interest:nth-child(2) {
+    --rotation: 1deg;
+}
+
+.interest:nth-child(3) {
+    --rotation: -1deg;
+}
+
+.interest:nth-child(4) {
+    --rotation: 2deg;
+}
+
+.interest:nth-child(5) {
+    --rotation: -2deg;
+}
+
+.interest:nth-child(6) {
+    --rotation: 1deg;
+}
+
+.interest:nth-child(7) {
+    --rotation: -1deg;
+}
+
+.interest:nth-child(2n) {
+    background: #d8c58d;
+}
+
+.interest:hover {
+    background: #c60000;
+    color: white;
+
+    transform:
+        rotate(2deg)
+        scale(1.04);
+}
+
+
+/* =========================================================
+   MUSIC
+========================================================= */
+
+.music {
+    margin-top: 13px;
+
+    padding: 14px;
+
+    background: #fff9ed;
+
+    border: 5px solid #403129;
+}
+
+.music-screen {
+    padding: 10px;
+
+    background: #e2d2ae;
+
+    border: 3px inset #8e7b62;
+
+    font:
+        bold 12px
+        "Courier New",
+        monospace;
+}
+
+.controls {
+    display: flex;
+    gap: 6px;
+
+    margin: 10px 0;
+}
+
+.music-button {
+    padding: 8px 13px;
+
+    background: #c00000;
+
+    color: white;
+
+    border: 2px outset #fff;
+
+    font:
+        bold 11px
+        "Courier New",
+        monospace;
+}
+
+.music-button:hover,
+.music-button.active {
+    background: #e2c77d;
+    color: #403129;
+}
+
+audio {
+    width: 100%;
+}
+
+.playlist {
+    margin-top: 9px;
+
+    border: 2px solid #403129;
+}
+
+.track {
+    padding: 9px;
+
+    border-bottom: 1px solid #b8a68c;
+
+    font:
+        12px
+        "Courier New",
+        monospace;
+
+    cursor: pointer;
+}
+
+.track:hover,
+.track.current {
+    background: #c00000;
+    color: white;
+}
+
+
+/* =========================================================
+   CONNECTIONS
+========================================================= */
+
+.connections {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+
+    margin-top: 13px;
+}
+
+.connection {
+    flex: 1;
+
+    min-width: 140px;
+
+    padding: 13px;
+
+    background: #fff8e8;
+
+    border: 3px solid #403129;
+
+    color: #403129;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    font:
+        bold 13px
+        "Courier New",
+        monospace;
+}
+
+.connection:hover {
+    background: #d00000;
+    color: white;
+
+    transform:
+        rotate(-1deg);
+}
+
+
+/* =========================================================
+   SILLY CREATURE ZONE
+========================================================= */
+
+.silly-zone {
+    position: relative;
+
+    height: 280px;
+
+    margin-top: 20px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(200,0,0,.12),
+            transparent 45%
+        ),
+        rgba(247,231,188,.5);
+
+    border: 4px dashed #927b5c;
+
+    touch-action: none;
+}
+
+.silly-zone::after {
+    content:
+        "✦ ✦ ✦ ✦ ✦ ✦ ✦";
+
+    position: absolute;
+
+    right: 15px;
+    top: 10px;
+
+    color: #c00000;
+
+    font:
+        bold 15px
+        "Courier New",
+        monospace;
+
+    animation:
+        sillyBlink
+        1.4s
+        steps(2)
+        infinite;
+}
+
+@keyframes sillyBlink {
+
+    0% {
+        opacity: .25;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: .25;
+    }
+}
+
+.silly-label {
+    position: absolute;
+
+    top: 10px;
+    left: 12px;
+
+    z-index: 10;
+
+    font:
+        bold 14px
+        "Courier New",
+        monospace;
+
+    color: #604837;
+
+    pointer-events: none;
+}
+
+.creature {
+    position: absolute;
+
+    width: 75px;
+    height: 75px;
+
+    object-fit: contain;
+
+    cursor: grab;
+
+    user-select: none;
+
+    z-index: 20;
+
+    touch-action: none;
+
+    pointer-events: auto;
+
+    will-change:
+        left,
+        top,
+        transform;
+}
+
+.creature:active {
+    cursor: grabbing;
+}
+
+#silly1 {
+    animation:
+        float1
+        2.4s
+        ease-in-out
+        infinite;
+}
+
+#silly2 {
+    animation:
+        float2
+        2.1s
+        ease-in-out
+        infinite;
+}
+
+#silly3 {
+    animation:
+        breakdance
+        .32s
+        linear
+        infinite;
+}
+
+#silly4 {
+    animation:
+        float3
+        2.7s
+        ease-in-out
+        infinite;
+}
+
+#silly5 {
+    animation:
+        float4
+        2.3s
+        ease-in-out
+        infinite;
+}
+
+@keyframes float1 {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(-3deg);
+    }
+
+    50% {
+        transform:
+            translateY(-17px)
+            rotate(4deg);
+    }
+}
+
+@keyframes float2 {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(3deg);
+    }
+
+    50% {
+        transform:
+            translateY(-13px)
+            rotate(-4deg);
+    }
+}
+
+@keyframes float3 {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(-2deg);
+    }
+
+    50% {
+        transform:
+            translateY(-20px)
+            rotate(3deg);
+    }
+}
+
+@keyframes float4 {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(2deg);
+    }
+
+    50% {
+        transform:
+            translateY(-15px)
+            rotate(-5deg);
+    }
+}
+
+@keyframes breakdance {
+
+    0% {
+        transform:
+            rotate(0deg)
+            scale(1);
+    }
+
+    25% {
+        transform:
+            rotate(90deg)
+            scale(1.08);
+    }
+
+    50% {
+        transform:
+            rotate(180deg)
+            scale(.9);
+    }
+
+    75% {
+        transform:
+            rotate(270deg)
+            scale(1.1);
+    }
+
+    100% {
+        transform:
+            rotate(360deg)
+            scale(1);
+    }
+}
+
+
+/* =========================================================
+   SECRET BUTTON
+========================================================= */
+
+.secret {
+    margin-top: 20px;
+
+    text-align: center;
+}
+
+.secret-button {
+    border: 0;
+
+    background: transparent;
+
+    color: rgba(81,64,53,.45);
+
+    font:
+        11px
+        "Courier New",
+        monospace;
+}
+
+.secret-button:hover {
+    color: #b40000;
+}
+
+.secret-message {
+    display: none;
+
+    margin-top: 7px;
+
+    font:
+        12px
+        "Courier New",
+        monospace;
+}
+
+.secret-message.show {
+    display: block;
+
+    animation:
+        secretBlink
+        .8s
+        steps(2)
+        infinite;
+}
+
+@keyframes secretBlink {
+
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .3;
+    }
+}
+
+
+/* =========================================================
+   FAKE CRASH SCREEN
+========================================================= */
+
+.fake-crash {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 999999;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(170,0,0,.35),
+            transparent 50%
+        ),
+        #111;
+
+    color: #ddd;
+
+    font-family:
+        "Courier New",
+        monospace;
+}
+
+.fake-crash.active {
+    display: flex;
+}
+
+.crash-window {
+    width: min(760px, 95%);
+
+    background: #e9e9e9;
+
+    color: #111;
+
+    border: 3px solid #fff;
+
+    box-shadow:
+        8px 8px 0 #000,
+        0 0 35px rgba(255,0,0,.45);
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    animation:
+        crashShake
+        .18s
+        infinite alternate;
+}
+
+@keyframes crashShake {
+
+    from {
+        transform:
+            translateX(-1px)
+            rotate(-.2deg);
+    }
+
+    to {
+        transform:
+            translateX(1px)
+            rotate(.2deg);
+    }
+}
+
+.crash-titlebar {
+    display: flex;
+
+    align-items: center;
+
+    padding: 7px 9px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #fff,
+            #bcbcbc
+        );
+
+    border-bottom: 2px solid #777;
+
+    font-weight: bold;
+
+    color: #222;
+}
+
+.crash-title {
+    flex: 1;
+}
+
+.crash-close {
+    width: 22px;
+    height: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ddd;
+
+    border: 2px outset #aaa;
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+.crash-body {
+    padding: 28px;
+}
+
+.crash-face {
+    float: left;
+
+    margin-right: 25px;
+
+    font-size: 70px;
+
+    line-height: 1;
+
+    color: #b40000;
+
+    animation:
+        crashFace
+        .7s
+        steps(2)
+        infinite;
+}
+
+@keyframes crashFace {
+
+    0% {
+        transform:
+            rotate(-3deg);
+    }
+
+    100% {
+        transform:
+            rotate(3deg);
+    }
+}
+
+.crash-body h1 {
+    margin: 0 0 15px;
+
+    font-size: 25px;
+}
+
+.crash-body p {
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+.crash-error {
+    margin-top: 20px;
+
+    padding: 18px;
+
+    background: #fff;
+
+    border: 2px inset #aaa;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    white-space: pre-line;
+
+    color: #111;
+}
+
+.crash-buttons {
+    margin-top: 20px;
+
+    text-align: right;
+}
+
+.reload-button {
+    padding: 9px 20px;
+
+    background: #ddd;
+
+    border: 3px outset #fff;
+
+    color: #111;
+
+    font:
+        bold 12px
+        "Courier New",
+        monospace;
+}
+
+.reload-button:hover {
+    background: #fff;
+}
+
+.reload-button:active {
+    border-style: inset;
+}
+
+.crash-secret-button {
+    margin-right: 10px;
+
+    padding: 9px 20px;
+
+    background: #292929;
+
+    border: 3px outset #555;
+
+    color: #e6c879;
+
+    font:
+        bold 12px
+        "Courier New",
+        monospace;
+}
+
+.crash-secret-button:hover {
+    background: #111;
+}
+
+.crash-secret-reveal {
+    display: none;
+
+    margin-top: 18px;
+
+    text-align: center;
+}
+
+.crash-secret-reveal.show {
+    display: block;
+}
+
+.crash-secret-reveal img {
+    max-width: 220px;
+
+    border: 3px solid #403129;
+
+    box-shadow:
+        5px 5px 0 rgba(0,0,0,.3);
+}
+
+.crash-secret-credit {
+    margin-top: 9px;
+
+    color: #ff8c00;
+
+    font:
+        bold 12px
+        "Courier New",
+        monospace;
+}
+
+
+/* =========================================================
+   DNI
+========================================================= */
+
+.dni {
+    margin-top: 13px;
+
+    padding: 19px;
+
+    background: #c00000;
+
+    color: white;
+
+    border: 5px solid #403129;
+
+    box-shadow:
+        8px 8px 0 #403129;
+
+    transform:
+        rotate(.5deg);
+}
+
+.dni h3 {
+    margin-top: 0;
+
+    font:
+        bold italic 27px
+        Georgia,
+        serif;
+}
+
+.dni p {
+    font-size: 14px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+    margin-top: 9px;
+
+    padding: 28px;
+
+    background: #403129;
+
+    color: #fff2d8;
+
+    border-top: 10px solid #b40000;
+
+    text-align: center;
+
+    font:
+        12px
+        "Courier New",
+        monospace;
+}
+
+.footer-name {
+    color: #e4c77c;
+
+    font:
+        bold italic 43px
+        Georgia,
+        serif;
+
+    text-shadow:
+        4px 4px 0 #a90000;
+}
+
+
+/* =========================================================
+   BACK TOP
+========================================================= */
+
+.back-top {
+    position: fixed;
+
+    right: 22px;
+    bottom: 22px;
+
+    z-index: 50;
+
+    padding: 10px 15px;
+
+    background: #403129;
+
+    color: white;
+
+    border: 3px outset #fff;
+
+    font:
+        bold 11px
+        "Courier New",
+        monospace;
+}
+
+.back-top:hover {
+    background: #c00000;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 750px) {
+
+    .content {
+        grid-template-columns: 1fr;
+    }
+
+    .header-text {
+        width: 100%;
+    }
+
+    .header h1 {
+        font-size: 60px;
+    }
+
+    .inventory {
+        position: relative;
+
+        right: auto;
+        bottom: auto;
+
+        width: 90%;
+
+        margin: 8px auto;
+    }
+
+    .vn-character-area {
+        flex-direction: column;
+
+        align-items: center;
+
+        min-height: 390px;
+
+        padding-top: 15px;
+    }
+
+    .grandma-sprite {
+        width: 500px;
+        height: 500px;
+
+        max-width: 110%;
+
+        margin-bottom: -55px;
+    }
+
+    .info-row {
+        grid-template-columns: 100px 1fr;
+    }
+
+    .crash-body {
+        padding: 18px;
+    }
+
+    .crash-face {
+        font-size: 50px;
+    }
+
+    .grandma-popup {
+        width: 220px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     FLOATING DECOR
+========================================================= -->
+
+<div class="sparkle">✦</div>
+<div class="sparkle">★</div>
+<div class="sparkle">✧</div>
+<div class="sparkle">✦</div>
+<div class="sparkle">★</div>
+<div class="sparkle">✧</div>
+<div class="sparkle">✦</div>
+<div class="sparkle">★</div>
+<div class="sparkle">✧</div>
+<div class="sparkle">✦</div>
+<div class="sparkle">★</div>
+<div class="sparkle">✧</div>
+<div class="sparkle">✦</div>
+<div class="sparkle">★</div>
+
+
+<div class="page">
+
+<div class="browser">
+
+<div class="browser-top">
+
+    <div class="browser-title">
+        GRANDMA'S PERSONAL PAGE
+    </div>
+
+    <div class="browser-buttons">
+        <span>_</span>
+        <span>□</span>
+        <span>×</span>
+    </div>
+
+</div>
+
+
+<div class="address">
+    ADDRESS:
+
+    <span class="address-bar">
+        http://grandma.local/
+    </span>
+</div>
+
+
+<div class="site">
+
+
+<header class="header">
+
+    <img
+        src="field.gif"
+        class="header-gif"
+        alt=""
+    >
+
+    <div class="header-overlay"></div>
+
+    <div class="header-text">
+
+        <div class="header-small">
+            PERSONAL PAGE / WELCOME
+        </div>
+
+        <h1>
+            GRANDMA
+        </h1>
+
+        <div class="header-name">
+            ALSO KNOWN AS MEEMAW
+        </div>
+
+        <div class="header-red-text">
+            she / her · straight
+        </div>
+
+    </div>
+
+</header>
+
+
+<nav class="nav">
+
+    <a href="#about">ABOUT</a>
+    <a href="#info">INFO</a>
+    <a href="#interests">INTERESTS</a>
+    <a href="#ocs">OCS</a>
+    <a href="#music">MUSIC</a>
+    <a href="#connections">CONTACT</a>
+    <a href="#dni">DNI / FRQS</a>
+
+</nav>
+
+
+<div class="content">
+
+
+<aside class="sidebar">
+
+
+<div class="sidebar-box">
+
+    <div class="sidebar-title">
+        PROFILE
+    </div>
+
+    <div class="sidebar-content">
+
+        <img
+            src="grandma.jpg"
+            class="profile"
+            alt=""
+        >
+
+        <div class="profile-name">
+            GRANDMA
+        </div>
+
+        <div class="profile-alias">
+            / MEEMAW /
+        </div>
+
+        <div class="status">
+            ONLINE
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="sidebar-box">
+
+    <div class="sidebar-title">
+        CURRENTLY
+    </div>
+
+    <div class="sidebar-content">
+
+        <b style="color:#b40000;">
+            playing:
+        </b>
+
+        Roblox
+
+        <br>
+
+        <b style="color:#b40000;">
+            doing:
+        </b>
+
+        OCs / art
+
+        <br>
+
+        <b style="color:#b40000;">
+            status:
+        </b>
+
+        around
+
+    </div>
+
+</div>
+
+
+<div class="sidebar-box">
+
+    <div class="sidebar-title">
+        CONTACT
+    </div>
+
+    <div class="sidebar-content">
+
+        <b style="color:#b40000;">
+            FRQs:
+        </b>
+
+        open!!
+
+        <br><br>
+
+        <b style="color:#b40000;">
+            DMs:
+        </b>
+
+        open most times unless stated otherwise.
+
+    </div>
+
+</div>
+
+
+</aside>
+
+
+<main class="main">
+
+
+<section
+    class="visual-novel"
+    id="about"
+>
+
+
+<div class="vn-character-area">
+
+
+<img
+    src="grandma-happy.png"
+    class="grandma-sprite"
+    id="grandmaSprite"
+    alt="Grandma"
+    draggable="false"
+>
+
+
+<div class="grandma-glitter g1">
+    ✦
+</div>
+
+<div class="grandma-glitter g2">
+    ★
+</div>
+
+<div class="grandma-glitter g3">
+    ✧
+</div>
+
+<div class="grandma-glitter g4">
+    ✦
+</div>
+
+<div class="grandma-glitter g5">
+    ★
+</div>
+
+<div class="grandma-glitter g6">
+    ✧
+</div>
+
+
+<div class="inventory">
+
+    <div class="inventory-title">
+        INVENTORY
+    </div>
+
+    <div
+        class="inventory-item"
+        data-description="A completely ordinary notebook. Most of the pages are empty, except for a few doodles and whatnot of her OCs."
+    >
+        notebook
+    </div>
+
+    <div
+        class="inventory-item"
+        data-description="An old locket that Grandma insists is important. She refuses to explain what's in it."
+    >
+        locket
+    </div>
+
+    <div
+        class="inventory-item"
+        data-description="WHY THE FUCK IS THIS IN YOUR INVENTORY???"
+    >
+        dog
+    </div>
+
+    <div
+        class="inventory-description"
+        id="inventoryDescription"
+    ></div>
+
+</div>
+
+
+</div>
+
+
+<div class="dialogue-box">
+
+    <div class="dialogue-name">
+        GRANDMA
+    </div>
+
+    <div
+        class="dialogue-text"
+        id="dialogueText"
+    >
+        HIO!! HIOO HI!! WELCOME TO <b>MY</b>
+        PAGE!!
+    </div>
+
+
+    <div
+        class="dialogue-controls"
+        id="dialogueControls"
+    >
+
+        <button
+            class="topic-button"
+            data-topic="about"
+        >
+            ABOUT ME
+        </button>
+
+        <button
+            class="topic-button"
+            data-topic="ocs"
+        >
+            OCS
+        </button>
+
+        <button
+            class="topic-button"
+            data-topic="music"
+        >
+            MUSIC
+        </button>
+
+        <button
+            class="topic-button"
+            data-topic="friends"
+        >
+            FRIENDS
+        </button>
+
+        <button
+            class="topic-button"
+            data-topic="goodbye"
+        >
+            GOODBYE
+        </button>
+
+        <button
+            class="topic-button secret-topic"
+            data-topic="secret"
+            id="secretTopicButton"
+            style="display:none;"
+        >
+            ???
+        </button>
+
+    </div>
+
+</div>
+
+
+<div
+    class="grandma-note"
+    id="grandmaNote"
+>
+    Grandma is in a WONDERFUL mood today.
+</div>
+
+
+</section>
+
+
+<div class="paint"></div>
+
+
+<section
+    class="section"
+    id="info"
+>
+
+    <div class="section-title">
+        basic info
+    </div>
+
+    <div class="info">
+
+        <div class="info-row">
+            <div class="info-label">NAME</div>
+            <div class="info-value">Grandma</div>
+        </div>
+
+        <div class="info-row">
+            <div class="info-label">ALSO</div>
+            <div class="info-value">Meemaw</div>
+        </div>
+
+        <div class="info-row">
+            <div class="info-label">PRONOUNS</div>
+            <div class="info-value">she / her</div>
+        </div>
+
+        <div class="info-row">
+            <div class="info-label">ORIENTATION</div>
+            <div class="info-value">straight</div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section
+    class="section"
+    id="interests"
+>
+
+    <div class="section-title">
+        interests
+    </div>
+
+    <div class="interests">
+
+        <div class="interest">ROBLOX</div>
+        <div class="interest">OC RELATED THINGS</div>
+        <div class="interest">TWO MEN AND A HALF</div>
+        <div class="interest">THE BACKROOMS MOVIE</div>
+        <div class="interest">SAVE ROBLOXIA</div>
+        <div class="interest">DELTARUNE</div>
+        <div class="interest">ART</div>
+
+    </div>
+
+</section>
+
+
+<section
+    class="section"
+    id="music"
+>
+
+    <div class="section-title">
+        music
+    </div>
+
+    <div class="music">
+
+        <div class="music-screen">
+
+            ♪
+
+            <span id="songTitle">
+                NOTHING PLAYING
+            </span>
+
+        </div>
+
+        <div class="controls">
+
+            <button
+                class="music-button"
+                id="prev"
+            >
+                ◀
+            </button>
+
+            <button
+                class="music-button"
+                id="play"
+            >
+                ▶ PLAY
+            </button>
+
+            <button
+                class="music-button"
+                id="next"
+            >
+                ▶
+            </button>
+
+            <button
+                class="music-button"
+                id="repeat"
+            >
+                ↻
+            </button>
+
+        </div>
+
+
+        <audio
+            id="audio"
+            controls
+        ></audio>
+
+
+        <div
+            class="playlist"
+            id="playlist"
+        ></div>
+
+    </div>
+
+</section>
+
+
+<section
+    class="section"
+    id="connections"
+>
+
+    <div class="section-title">
+        get connected
+    </div>
+
+    <div class="connections">
+
+        <a
+            href="https://discord.com/"
+            class="connection"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            <div>
+                DISCORD
+            </div>
+
+            <div
+                style="
+                    margin-top:7px;
+                    font-size:11px;
+                    color:#b40000;
+                "
+            >
+                meemawtickler
+            </div>
+
+        </a>
+
+
+        <a
+            href="https://open.spotify.com/user/yf442f44h0v24mlsek7n711pj?si=634f9d0578f14a2f"
+            class="connection"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            SPOTIFY
+        </a>
+
+
+        <a
+            href="https://www.tiktok.com/@meemawwed"
+            class="connection"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            TIKTOK
+        </a>
+
+    </div>
+
+</section>
+
+
+<section
+    class="section"
+    id="ocs"
+>
+
+    <div class="section-title">
+        the ocs
+    </div>
+
+    <div class="yearbook">
+
+        <div class="yearbook-grid">
+
+            <div class="yearbook-card" data-oc="gerald">
+
+                <img
+                    src="gerald.png"
+                    class="yearbook-photo"
+                    alt="Gerald"
+                >
+
+                <div class="yearbook-name">
+                    GERALD
+                </div>
+
+                <div class="yearbook-caption">
+                    best of the best! king g that's my name'
+                </div>
+
+            </div>
+
+
+            <div class="yearbook-card" data-oc="kratos">
+
+                <img
+                    src="kratos.png"
+                    class="yearbook-photo"
+                    alt="Kratos"
+                >
+
+                <div class="yearbook-name">
+                    KRATOS
+                </div>
+
+                <div class="yearbook-caption">
+                    hi im kratos and.. . . UM.
+                </div>
+
+            </div>
+
+
+            <div class="yearbook-card" data-oc="grandma">
+
+                <img
+                    src="grandma.png"
+                    class="yearbook-photo"
+                    alt="Grandma"
+                >
+
+                <div class="yearbook-name">
+                    GRANDMA
+                </div>
+
+                <div class="yearbook-caption">
+                    ME ME!!! THE ME!!
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="section-title">
+        silly things
+    </div>
+
+
+    <div class="silly-zone">
+
+        <div class="silly-label">
+            you can move these around
+        </div>
+
+
+        <img
+            src="silly1.png"
+            id="silly1"
+            class="creature"
+            style="left:10%; top:35%;"
+            draggable="false"
+            alt=""
+        >
+
+
+        <img
+            src="silly2.png"
+            id="silly2"
+            class="creature"
+            style="left:43%; top:48%;"
+            draggable="false"
+            alt=""
+        >
+
+
+        <img
+            src="silly3.png"
+            id="silly3"
+            class="creature"
+            style="left:72%; top:32%;"
+            draggable="false"
+            alt=""
+        >
+
+
+        <img
+            src="silly4.png"
+            id="silly4"
+            class="creature"
+            style="left:27%; top:70%;"
+            draggable="false"
+            alt=""
+        >
+
+
+        <img
+            src="silly5.png"
+            id="silly5"
+            class="creature"
+            style="left:58%; top:72%;"
+            draggable="false"
+            alt=""
+        >
+
+    </div>
+
+</section>
+
+
+<div class="secret">
+
+    <button
+        class="secret-button"
+        id="secretButton"
+    >
+        ???
+    </button>
+
+    <div
+        class="secret-message"
+        id="secretMessage"
+    >
+        wow you found the extremely important secret. congrats LOL
+    </div>
+
+</div>
+
+
+<section
+    class="section"
+    id="dni"
+>
+
+    <div class="section-title">
+        boundaries
+    </div>
+
+
+    <div class="dni">
+
+        <h3>
+            dni / frqs / dms
+        </h3>
+
+        <p>
+            <b>DNI:</b>
+            common criteria like pedos, MAGA,
+            zoos and etc.
+        </p>
+
+        <p>
+            <b>FRQs:</b>
+            open!!
+        </p>
+
+        <p>
+            <b>DMs:</b>
+            open most times unless I state otherwise.
+        </p>
+
+        <p>
+            Sometimes I may be rude or insensitive,
+            so please tell me if you feel uncomfortable.
+            I don't mind joking insults or anything like
+            that, but boundaries still exist yknow.
+        </p>
+
+    </div>
+
+</section>
+
+
+</main>
+
+</div>
+
+
+<footer class="footer">
+
+    <div class="footer-name">
+        GRANDMA
+    </div>
+
+    <br>
+
+    MEEMAW · SHE / HER · STRAIGHT
+
+    <br><br>
+
+    ✦ ✧ ✦ thank you for visiting ✦ ✧ ✦
+
+</footer>
+
+
+</div>
+</div>
+
+
+<button
+    class="back-top"
+    onclick="window.scrollTo({top:0,behavior:'smooth'})"
+>
+    BACK TO TOP
+</button>
+
+
+<button
+    class="achievements-tab"
+    id="achievementsTab"
+>
+    🏆 ACHIEVEMENTS
+</button>
+
+<div
+    class="achievements-panel"
+    id="achievementsPanel"
+>
+
+    <div class="achievements-panel-title">
+        ACHIEVEMENTS
+    </div>
+
+    <div id="achievementsList"></div>
+
+</div>
+
+<div
+    class="achievement-toast"
+    id="achievementToast"
+></div>
+
+
+<audio
+    id="dialogueSound"
+    src="dialogue.mp3"
+    preload="auto"
+></audio>
+
+
+<!-- =========================================================
+     FAKE CRASH
+========================================================= -->
+
+<div
+    class="fake-crash"
+    id="fakeCrash"
+>
+
+    <div class="crash-window">
+
+        <div class="crash-titlebar">
+
+            <div class="crash-title">
+                grandma.local - ERROR
+            </div>
+
+            <div
+                class="crash-close"
+                id="crashClose"
+            >
+                ×
+            </div>
+
+        </div>
+
+
+        <div class="crash-body">
+
+            <div class="crash-face">
+                :(
+            </div>
+
+
+            <h1>
+                WHOOPS! GRANDMA'S PAGE CRASHED.
+            </h1>
+
+
+            <p>
+                Something went horribly, spectacularly,
+                completely stupidly wrong.
+            </p>
+
+
+            <p>
+                Don't worry though. This is totally
+                an easter egg and nothing actually broke.
+            </p>
+
+
+            <div class="crash-error">
+
+ERROR CODE:                 404 6769 10736
+
+Details:                    The website encountered an unexpected
+                            easter egg.
+
+Possible solution:          Stop clicking random shit. IDIOT.
+
+            </div>
+
+
+            <div class="crash-buttons">
+
+                <button
+                    class="crash-secret-button"
+                    id="crashSecretButton"
+                >
+                    ???
+                </button>
+
+                <button
+                    class="reload-button"
+                    id="reloadPage"
+                >
+                    RELOAD PAGE
+                </button>
+
+            </div>
+
+
+            <div
+                class="crash-secret-reveal"
+                id="crashSecretReveal"
+            >
+
+                <img
+                    src="gerald-backflip.gif"
+                    alt="Gerald doing a backflip"
+                >
+
+                <div class="crash-secret-credit">
+                    suggested by marshall ;)
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+/* =========================================================
+   MUSIC PLAYER
+========================================================= */
+
+const songs = [
+
+    {
+        title: "^_^",
+        file: "music/song1.mp3"
+    },
+
+    {
+        title: ":D",
+        file: "music/song2.mp3"
+    },
+
+    {
+        title: "FFFUCK YOU.",
+        file: "music/song3.mp3"
+    },
+
+    {
+        title: "0-0",
+        file: "music/song4.mp3"
+    }
+
+];
+
+
+const audio =
+    document.getElementById("audio");
+
+const songTitle =
+    document.getElementById("songTitle");
+
+const playlist =
+    document.getElementById("playlist");
+
+const playButton =
+    document.getElementById("play");
+
+const nextButton =
+    document.getElementById("next");
+
+const prevButton =
+    document.getElementById("prev");
+
+const repeatButton =
+    document.getElementById("repeat");
+
+
+let currentSong = 0;
+let repeating = false;
+
+
+function loadSong(index) {
+
+    currentSong = index;
+
+    audio.src =
+        songs[currentSong].file;
+
+    songTitle.textContent =
+        songs[currentSong].title;
+
+    renderPlaylist();
+
+}
+
+
+function renderPlaylist() {
+
+    playlist.innerHTML = "";
+
+    songs.forEach(
+        (song, index) => {
+
+            const track =
+                document.createElement("div");
+
+            track.className =
+                "track";
+
+            if (
+                index === currentSong
+            ) {
+
+                track.classList.add(
+                    "current"
+                );
+
+            }
+
+            track.textContent =
+                String(index + 1).padStart(2, "0") +
+                " · " +
+                song.title;
+
+
+            track.addEventListener(
+                "click",
+                () => {
+
+                    loadSong(index);
+
+                    audio.play().catch(
+                        () => {}
+                    );
+
+                    playButton.textContent =
+                        "❚❚ PAUSE";
+
+                }
+            );
+
+
+            playlist.appendChild(track);
+
+        }
+    );
+
+}
+
+
+playButton.addEventListener(
+    "click",
+    () => {
+
+        if (audio.paused) {
+
+            audio.play().catch(
+                () => {}
+            );
+
+            playButton.textContent =
+                "❚❚ PAUSE";
+
+        } else {
+
+            audio.pause();
+
+            playButton.textContent =
+                "▶ PLAY";
+
+        }
+
+    }
+);
+
+
+nextButton.addEventListener(
+    "click",
+    () => {
+
+        currentSong++;
+
+        if (
+            currentSong >=
+            songs.length
+        ) {
+
+            currentSong = 0;
+
+        }
+
+        loadSong(currentSong);
+
+        audio.play().catch(
+            () => {}
+        );
+
+        playButton.textContent =
+            "❚❚ PAUSE";
+
+    }
+);
+
+
+prevButton.addEventListener(
+    "click",
+    () => {
+
+        currentSong--;
+
+        if (
+            currentSong < 0
+        ) {
+
+            currentSong =
+                songs.length - 1;
+
+        }
+
+        loadSong(currentSong);
+
+        audio.play().catch(
+            () => {}
+        );
+
+        playButton.textContent =
+            "❚❚ PAUSE";
+
+    }
+);
+
+
+repeatButton.addEventListener(
+    "click",
+    () => {
+
+        repeating =
+            !repeating;
+
+        repeatButton.classList.toggle(
+            "active",
+            repeating
+        );
+
+    }
+);
+
+
+audio.addEventListener(
+    "ended",
+    () => {
+
+        unlockAchievement(
+            "playedSong"
+        );
+
+
+        if (repeating) {
+
+            audio.currentTime = 0;
+
+            audio.play().catch(
+                () => {}
+            );
+
+        } else {
+
+            nextButton.click();
+
+        }
+
+    }
+);
+
+
+loadSong(0);
+
+
+/* =========================================================
+   GRANDMA SPRITE SYSTEM
+========================================================= */
+
+const grandmaSprite =
+    document.getElementById(
+        "grandmaSprite"
+    );
+
+
+const IDLE_SPRITE =
+    "grandma-happy.png";
+
+const TALKING_SPRITE =
+    "grandma-talking.png";
+
+
+let spriteTimeout = null;
+
+
+function grandmaIdle() {
+
+    clearTimeout(
+        spriteTimeout
+    );
+
+    grandmaSprite.src =
+        IDLE_SPRITE;
+
+    grandmaSprite.classList.remove(
+        "talking"
+    );
+
+}
+
+
+function grandmaTalking() {
+
+    clearTimeout(
+        spriteTimeout
+    );
+
+    grandmaSprite.src =
+        TALKING_SPRITE;
+
+    grandmaSprite.classList.add(
+        "talking"
+    );
+
+}
+
+
+function stopGrandmaTalking() {
+
+    clearTimeout(
+        spriteTimeout
+    );
+
+    grandmaSprite.src =
+        IDLE_SPRITE;
+
+    grandmaSprite.classList.remove(
+        "talking"
+    );
+
+}
+
+
+/* =========================================================
+   GRANDMA DIALOGUE
+========================================================= */
+
+const dialogueText =
+    document.getElementById(
+        "dialogueText"
+    );
+
+const dialogueSound =
+    document.getElementById(
+        "dialogueSound"
+    );
+
+const grandmaNote =
+    document.getElementById(
+        "grandmaNote"
+    );
+
+const vnCharacterArea =
+    document.querySelector(
+        ".vn-character-area"
+    );
+
+const dialogueBoxEl =
+    document.querySelector(
+        ".dialogue-box"
+    );
+
+
+const dialogue = {
+
+    about: [
+
+        `Hhhmm.. For starters... I don't know what I can say here really ^^`,
+
+        `OH!! I guess I can tell you what I'm into :D`,
+
+        `I like Roblox as you see. I'm a Robloxian!! ^_^`,
+
+        `Obviously. You knew that already, right? 0_0`,
+
+        `I also like art, Deltarune, The Backrooms, and a bunch of other random stuff ^^`,
+
+        `There!! That's probably enough of an introduction :D`
+
+    ],
+
+
+    ocs: [
+
+        `OH OH!! I HAVE OCS! YEAH I DO!! ^_^`,
+
+        `All you gotta do is ask me about them and trust me... I'll tell you everything I know ^^`,
+
+        `Seriously!! :D`,
+
+        `I have a lot of them. Probably too many hehe ^_^`
+
+    ],
+
+
+    music: [
+
+        `...There's literally a music player RIGHT below me 0_0`,
+
+        `See for yourself!! ^^`,
+
+        `Or get connected with me on Spotify :D`,
+
+        `You'll totally like my music!! ^_^`
+
+    ],
+
+
+    friends: [
+
+        `OH OH I LOVE MY FRIENDS AND I HAVE A LOT OF THEM!!!! ^_^`,
+
+        `IF YOU'RE MY FRIEND READING THIS, KUDOS TO YOU!! :D`,
+
+        `Seriously though, I appreciate you guys so much ^^`,
+
+        `Even if some of you are... interesting to say the least. LOL ^_^`
+
+    ],
+
+
+    goodbye: [
+
+        `OH, ALREADY LEAVING? 0_0`,
+
+        `Well, thanks for stopping by!! ^^`,
+
+        `Come back whenever you want, okay? :D`,
+
+        `I'll probably still be here ^_^`
+
+    ]
+
+};
+
+
+const topicState = {};
+
+
+Object.keys(dialogue).forEach(
+    topic => {
+
+        topicState[topic] = {
+            clicks: 0
+        };
+
+    }
+);
+
+
+let currentTopic = null;
+let typingTimer = null;
+
+
+function playDialogueSound() {
+
+    dialogueSound.pause();
+
+    dialogueSound.currentTime = 0;
+
+    dialogueSound.play().catch(
+        () => {}
+    );
+
+}
+
+
+function speak(text) {
+
+    clearInterval(
+        typingTimer
+    );
+
+    grandmaTalking();
+
+    dialogueText.textContent = "";
+
+    playDialogueSound();
+
+
+    let index = 0;
+
+
+    typingTimer =
+        setInterval(
+            () => {
+
+                if (
+                    index >= text.length
+                ) {
+
+                    clearInterval(
+                        typingTimer
+                    );
+
+                    dialogueSound.pause();
+
+                    spriteTimeout =
+                        setTimeout(
+                            stopGrandmaTalking,
+                            250
+                        );
+
+                    return;
+
+                }
+
+
+                dialogueText.textContent +=
+                    text[index];
+
+                index++;
+
+            },
+            18
+        );
+
+}
+
+
+function chooseDialogue(topic) {
+
+    const state =
+        topicState[topic];
+
+    state.clicks++;
+
+    currentTopic =
+        topic;
+
+
+    const responses =
+        dialogue[topic];
+
+
+    let responseIndex =
+        state.clicks - 1;
+
+
+    if (
+        responseIndex >=
+        responses.length
+    ) {
+
+        responseIndex =
+            responses.length - 1;
+
+    }
+
+
+    dialogueText.classList.remove(
+        "angry"
+    );
+
+
+    if (
+        state.clicks >= 6
+    ) {
+
+        dialogueText.classList.add(
+            "angry"
+        );
+
+        grandmaNote.textContent =
+            "Grandma is REALLY tired of that topic.";
+
+        speak(
+            `SSHHHHUT THE FUCK UPPP ASK ME SOMETHING ELSE!!!!!!!!!`
+        );
+
+
+        vnCharacterArea.classList.add(
+            "angry-shake"
+        );
+
+        dialogueBoxEl.classList.add(
+            "angry-shake"
+        );
+
+
+        unlockAchievement(
+            "madeGrandmaAngry"
+        );
+
+
+        const button =
+            document.querySelector(
+                `[data-topic="${topic}"]`
+            );
+
+
+        if (button) {
+
+            button.style.display =
+                "none";
+
+        }
+
+
+        return;
+
+    }
+
+
+    if (
+        state.clicks >= 4
+    ) {
+
+        dialogueText.classList.add(
+            "angry"
+        );
+
+        grandmaNote.textContent =
+            "Grandma is getting tired of this.";
+
+        speak(
+            `I already told you that. Why are you asking me again???`
+        );
+
+        return;
+
+    }
+
+
+    grandmaNote.textContent =
+        "Grandma is happy to talk.";
+
+    speak(
+        responses[responseIndex]
+    );
+
+}
+
+
+document
+    .querySelectorAll(".topic-button")
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const topic =
+                        button.dataset.topic;
+
+
+                    if (
+                        topic === "secret"
+                    ) {
+
+                        openFakeCrash();
+
+                        return;
+
+                    }
+
+
+                    if (
+                        currentTopic !== null &&
+                        currentTopic !== topic
+                    ) {
+
+                        document
+                            .querySelectorAll(
+                                ".topic-button"
+                            )
+                            .forEach(
+                                other => {
+
+                                    const otherTopic =
+                                        other.dataset.topic;
+
+
+                                    if (
+                                        otherTopic ===
+                                        "secret"
+                                    ) {
+
+                                        if (
+                                            secretUnlocked
+                                        ) {
+
+                                            other.style.display =
+                                                "";
+
+                                        }
+
+                                        return;
+
+                                    }
+
+
+                                    if (
+                                        topicState[
+                                            otherTopic
+                                        ].clicks < 6
+                                    ) {
+
+                                        other.style.display =
+                                            "";
+
+                                    }
+
+                                }
+                            );
+
+                        dialogueText.classList.remove(
+                            "angry"
+                        );
+
+                        vnCharacterArea.classList.remove(
+                            "angry-shake"
+                        );
+
+                        dialogueBoxEl.classList.remove(
+                            "angry-shake"
+                        );
+
+                        grandmaNote.textContent =
+                            "Grandma has calmed down again.";
+
+                    }
+
+
+                    chooseDialogue(
+                        topic
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   INVENTORY
+========================================================= */
+
+const inventoryItems =
+    document.querySelectorAll(
+        ".inventory-item"
+    );
+
+const inventoryDescription =
+    document.getElementById(
+        "inventoryDescription"
+    );
+
+
+inventoryItems.forEach(
+    item => {
+
+        item.addEventListener(
+            "click",
+            () => {
+
+                inventoryItems.forEach(
+                    other => {
+
+                        other.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                item.classList.add(
+                    "active"
+                );
+
+
+                inventoryDescription.textContent =
+                    item.dataset.description;
+
+
+                inventoryDescription.classList.add(
+                    "show"
+                );
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   CREATURE DRAGGING / THROWING
+========================================================= */
+
+const sillyZone =
+    document.querySelector(
+        ".silly-zone"
+    );
+
+
+const creatures =
+    document.querySelectorAll(
+        ".creature"
+    );
+
+
+const creaturePhysics =
+    new Map();
+
+
+function initializeCreature(
+    creature
+) {
+
+    const zoneWidth =
+        sillyZone.clientWidth;
+
+    const zoneHeight =
+        sillyZone.clientHeight;
+
+
+    const leftValue =
+        parseFloat(
+            creature.style.left
+        );
+
+
+    const topValue =
+        parseFloat(
+            creature.style.top
+        );
+
+
+    const physics = {
+
+        x:
+            zoneWidth *
+            leftValue /
+            100,
+
+        y:
+            zoneHeight *
+            topValue /
+            100,
+
+        vx: 0,
+
+        vy: 0,
+
+        dragging: false,
+
+        pointerId: null,
+
+        offsetX: 0,
+
+        offsetY: 0,
+
+        lastX: 0,
+
+        lastY: 0,
+
+        lastTime: 0
+
+    };
+
+
+    creaturePhysics.set(
+        creature,
+        physics
+    );
+
+
+    creature.style.left =
+        physics.x + "px";
+
+    creature.style.top =
+        physics.y + "px";
+
+}
+
+
+creatures.forEach(
+    creature => {
+
+        initializeCreature(
+            creature
+        );
+
+
+        creature.addEventListener(
+            "pointerdown",
+            event => {
+
+                event.preventDefault();
+
+                const physics =
+                    creaturePhysics.get(
+                        creature
+                    );
+
+
+                physics.dragging =
+                    true;
+
+                physics.pointerId =
+                    event.pointerId;
+
+
+                physics.vx = 0;
+                physics.vy = 0;
+
+
+                const creatureRect =
+                    creature.getBoundingClientRect();
+
+
+                physics.offsetX =
+                    event.clientX -
+                    creatureRect.left;
+
+
+                physics.offsetY =
+                    event.clientY -
+                    creatureRect.top;
+
+
+                physics.lastX =
+                    event.clientX;
+
+                physics.lastY =
+                    event.clientY;
+
+                physics.lastTime =
+                    performance.now();
+
+
+                creature.setPointerCapture(
+                    event.pointerId
+                );
+
+            }
+        );
+
+
+        creature.addEventListener(
+            "pointermove",
+            event => {
+
+                const physics =
+                    creaturePhysics.get(
+                        creature
+                    );
+
+
+                if (
+                    !physics.dragging ||
+                    physics.pointerId !==
+                    event.pointerId
+                ) {
+
+                    return;
+
+                }
+
+
+                event.preventDefault();
+
+
+                const zoneRect =
+                    sillyZone.getBoundingClientRect();
+
+
+                const creatureWidth =
+                    creature.offsetWidth;
+
+                const creatureHeight =
+                    creature.offsetHeight;
+
+
+                const maxX =
+                    sillyZone.clientWidth -
+                    creatureWidth;
+
+                const maxY =
+                    sillyZone.clientHeight -
+                    creatureHeight;
+
+
+                let x =
+                    event.clientX -
+                    zoneRect.left -
+                    physics.offsetX;
+
+
+                let y =
+                    event.clientY -
+                    zoneRect.top -
+                    physics.offsetY;
+
+
+                x =
+                    Math.max(
+                        0,
+                        Math.min(
+                            x,
+                            maxX
+                        )
+                    );
+
+
+                y =
+                    Math.max(
+                        0,
+                        Math.min(
+                            y,
+                            maxY
+                        )
+                    );
+
+
+                const now =
+                    performance.now();
+
+
+                const deltaTime =
+                    Math.max(
+                        now -
+                        physics.lastTime,
+                        1
+                    );
+
+
+                physics.vx =
+                    (
+                        event.clientX -
+                        physics.lastX
+                    ) /
+                    deltaTime *
+                    16;
+
+
+                physics.vy =
+                    (
+                        event.clientY -
+                        physics.lastY
+                    ) /
+                    deltaTime *
+                    16;
+
+
+                physics.x = x;
+                physics.y = y;
+
+
+                physics.lastX =
+                    event.clientX;
+
+                physics.lastY =
+                    event.clientY;
+
+                physics.lastTime =
+                    now;
+
+
+                creature.style.left =
+                    x + "px";
+
+                creature.style.top =
+                    y + "px";
+
+            }
+        );
+
+
+        function releaseCreature(
+            event
+        ) {
+
+            const physics =
+                creaturePhysics.get(
+                    creature
+                );
+
+
+            if (
+                !physics.dragging
+            ) {
+
+                return;
+
+            }
+
+
+            physics.dragging =
+                false;
+
+
+            physics.pointerId =
+                null;
+
+
+            unlockAchievement(
+                "movedCreature"
+            );
+
+
+            physics.vx *= 1.8;
+            physics.vy *= 1.8;
+
+
+            const maximumVelocity =
+                28;
+
+
+            physics.vx =
+                Math.max(
+                    -maximumVelocity,
+                    Math.min(
+                        physics.vx,
+                        maximumVelocity
+                    )
+                );
+
+
+            physics.vy =
+                Math.max(
+                    -maximumVelocity,
+                    Math.min(
+                        physics.vy,
+                        maximumVelocity
+                    )
+                );
+
+
+            try {
+
+                creature.releasePointerCapture(
+                    event.pointerId
+                );
+
+            } catch (error) {}
+
+        }
+
+
+        creature.addEventListener(
+            "pointerup",
+            releaseCreature
+        );
+
+
+        creature.addEventListener(
+            "pointercancel",
+            releaseCreature
+        );
+
+    }
+);
+
+
+/* =========================================================
+   CREATURE PHYSICS LOOP
+========================================================= */
+
+function creaturePhysicsLoop() {
+
+    creaturePhysics.forEach(
+        (physics, creature) => {
+
+            if (
+                !physics.dragging
+            ) {
+
+                physics.x +=
+                    physics.vx;
+
+                physics.y +=
+                    physics.vy;
+
+
+                physics.vx *=
+                    .985;
+
+                physics.vy *=
+                    .985;
+
+
+                physics.vy +=
+                    .12;
+
+
+                const maxX =
+                    sillyZone.clientWidth -
+                    creature.offsetWidth;
+
+
+                const maxY =
+                    sillyZone.clientHeight -
+                    creature.offsetHeight;
+
+
+                if (
+                    physics.x < 0
+                ) {
+
+                    physics.x = 0;
+
+                    physics.vx *=
+                        -.72;
+
+                }
+
+
+                if (
+                    physics.x > maxX
+                ) {
+
+                    physics.x =
+                        maxX;
+
+                    physics.vx *=
+                        -.72;
+
+                }
+
+
+                if (
+                    physics.y < 0
+                ) {
+
+                    physics.y = 0;
+
+                    physics.vy *=
+                        -.72;
+
+                }
+
+
+                if (
+                    physics.y > maxY
+                ) {
+
+                    physics.y =
+                        maxY;
+
+                    physics.vy *=
+                        -.72;
+
+                }
+
+            }
+
+
+            creature.style.left =
+                physics.x + "px";
+
+            creature.style.top =
+                physics.y + "px";
+
+        }
+    );
+
+
+    requestAnimationFrame(
+        creaturePhysicsLoop
+    );
+
+}
+
+
+requestAnimationFrame(
+    creaturePhysicsLoop
+);
+
+
+/* =========================================================
+   SECRET EASTER EGG
+========================================================= */
+
+const secretButton =
+    document.getElementById(
+        "secretButton"
+    );
+
+const secretMessage =
+    document.getElementById(
+        "secretMessage"
+    );
+
+const secretTopicButton =
+    document.getElementById(
+        "secretTopicButton"
+    );
+
+const fakeCrash =
+    document.getElementById(
+        "fakeCrash"
+    );
+
+const reloadPage =
+    document.getElementById(
+        "reloadPage"
+    );
+
+
+const crashClose =
+    document.getElementById(
+        "crashClose"
+    );
+
+
+const crashSecretButton =
+    document.getElementById(
+        "crashSecretButton"
+    );
+
+const crashSecretReveal =
+    document.getElementById(
+        "crashSecretReveal"
+    );
+
+
+let secretUnlocked =
+    false;
+
+
+secretButton.addEventListener(
+    "click",
+    () => {
+
+        secretMessage.classList.toggle(
+            "show"
+        );
+
+
+        unlockAchievement(
+            "foundSecret"
+        );
+
+
+        if (
+            !secretUnlocked
+        ) {
+
+            secretUnlocked =
+                true;
+
+
+            secretTopicButton.style.display =
+                "";
+
+        }
+
+    }
+);
+
+
+function openFakeCrash() {
+
+    fakeCrash.classList.add(
+        "active"
+    );
+
+    unlockAchievement(
+        "openedCrash"
+    );
+
+}
+
+
+reloadPage.addEventListener(
+    "click",
+    () => {
+
+        window.location.reload();
+
+    }
+);
+
+
+crashClose.addEventListener(
+    "click",
+    () => {
+
+        fakeCrash.classList.remove(
+            "active"
+        );
+
+    }
+);
+
+
+crashSecretButton.addEventListener(
+    "click",
+    () => {
+
+        crashSecretReveal.classList.toggle(
+            "show"
+        );
+
+
+        if (
+            crashSecretReveal.classList.contains(
+                "show"
+            )
+        ) {
+
+            unlockAchievement(
+                "foundGerald"
+            );
+
+        }
+
+    }
+);
+
+
+fakeCrash.addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target ===
+            fakeCrash
+        ) {
+
+            fakeCrash.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   RANDOM GRANDMA POPUPS
+========================================================= */
+
+const grandmaPopupMessages = [
+
+    { text: "I forgot what I was doing ^^", mood: "confused" },
+    { text: "WHY IS THERE A DOG IN MY INVENTORY 0_0", mood: "confused" },
+    { text: "I think I left the stove on...", mood: "confused" },
+    { text: "do NOT ask me what happened to the locket >:(", mood: "angry" },
+    { text: "I made this website and I don't know how :D", mood: "happy" },
+    { text: "HELLO!!!! ^_^", mood: "happy" },
+    { text: "have you seen my glasses 0_0", mood: "confused" },
+    { text: "I need to make another OC ^^", mood: "happy" },
+    { text: "Roblox is very important to me :D", mood: "happy" },
+    { text: "I have been staring at this page for 20 minutes... z z z", mood: "sleepy" },
+    { text: "who put this here 0_0", mood: "confused" },
+    { text: "I should probably clean my room ^^", mood: "happy" },
+    { text: "I wonder what my OCs are doing ^_^", mood: "happy" },
+    { text: "WAIT I HAVE AN IDEA!! :D", mood: "happy" },
+    { text: "I forgot to eat again... z z z", mood: "sleepy" },
+    { text: "This website is very good. I made it :D", mood: "happy" },
+    { text: "don't touch my notebook >:(", mood: "angry" },
+    { text: "I have too many OCs LOL ^^", mood: "happy" },
+    { text: "what if I made another OC ^_^", mood: "happy" },
+    { text: "I am going to make another OC!! :D", mood: "happy" },
+    { text: "I think something is wrong with the dog 0_0", mood: "confused" },
+    { text: "why is everyone so quiet... z z z", mood: "sleepy" },
+    { text: "I like this little website ^^", mood: "happy" },
+    { text: "I should add more stuff here ^_^", mood: "happy" },
+    { text: "I have no idea what I'm doing LOL :D", mood: "happy" },
+    { text: "HELLO??? ARE YOU STILL THERE??? 0_0", mood: "confused" },
+    { text: "I am busy being Grandma ^^", mood: "happy" },
+    { text: "I need more pictures ^_^", mood: "happy" },
+    { text: "this is probably fine ^^;;", mood: "confused" },
+    { text: "I forgot what I was going to say again... 0_0", mood: "confused" },
+    { text: "look at my silly creatures!! :D", mood: "happy" },
+    { text: "stop looking at me >:(", mood: "angry" },
+    { text: "okay you can keep looking ^^", mood: "happy" },
+    { text: "I KNOW YOU'RE STILL HERE 0_0", mood: "confused" },
+    { text: "I should probably go draw something ^_^", mood: "happy" },
+    { text: "what if I put another button here :D", mood: "happy" },
+    { text: "DO NOT PRESS THE BUTTON >:(", mood: "angry" },
+    { text: "actually press the button ^^", mood: "happy" },
+    { text: "I changed my mind LOL", mood: "happy" },
+    { text: "I am having a wonderful day!! ^_^", mood: "happy" },
+    { text: "something feels suspicious... 0_0", mood: "feral" },
+    { text: "I blame the dog >:(", mood: "angry" },
+    { text: "I blame Roblox >:(", mood: "angry" },
+    { text: "I blame YOU >:(", mood: "feral" },
+    { text: "everything is completely normal ^^;;", mood: "confused" },
+    { text: "probably... z z z", mood: "sleepy" },
+    { text: "I think my website is haunted 0_0", mood: "feral" },
+    { text: "anyway!!! ^_^", mood: "happy" },
+    { text: "hi again!! ^^", mood: "happy" },
+    { text: "you keep coming back here :D", mood: "happy" },
+    { text: "that's nice ^^", mood: "happy" }
+
+];
+
+
+const popupMoodTitles = {
+
+    happy: "GRANDMA.EXE",
+    confused: "GRANDMA_?.EXE",
+    sleepy: "GRANDMA_ZZZ.EXE",
+    angry: "GRANDMA_MAD.EXE",
+    feral: "GRANDMA_????.EXE"
+
+};
+
+
+let popupCount = 0;
+
+const MAX_POPUPS =
+    2;
+
+
+function createGrandmaPopup() {
+
+    if (
+        popupCount >=
+        MAX_POPUPS
+    ) {
+
+        return;
+
+    }
+
+
+    popupCount++;
+
+
+    const popup =
+        document.createElement(
+            "div"
+        );
+
+    popup.className =
+        "grandma-popup";
+
+
+    const rotation =
+        (
+            Math.random() * 6 - 3
+        ).toFixed(2);
+
+
+    popup.style.setProperty(
+        "--popup-rotation",
+        rotation + "deg"
+    );
+
+
+    const maxLeft =
+        Math.max(
+            15,
+            window.innerWidth - 280
+        );
+
+
+    const maxTop =
+        Math.max(
+            80,
+            window.innerHeight - 190
+        );
+
+
+    const left =
+        Math.floor(
+            Math.random() *
+            maxLeft
+        );
+
+
+    const top =
+        Math.floor(
+            Math.random() *
+            maxTop
+        );
+
+
+    popup.style.left =
+        Math.max(
+            10,
+            Math.min(
+                left,
+                window.innerWidth - 270
+            )
+        ) + "px";
+
+
+    popup.style.top =
+        Math.max(
+            55,
+            Math.min(
+                top,
+                window.innerHeight - 170
+            )
+        ) + "px";
+
+
+    const message =
+        grandmaPopupMessages[
+            Math.floor(
+                Math.random() *
+                grandmaPopupMessages.length
+            )
+        ];
+
+
+    popup.classList.add(
+        "mood-" + message.mood
+    );
+
+
+    const titleText =
+        popupMoodTitles[message.mood] ||
+        "GRANDMA.EXE";
+
+
+    popup.innerHTML = `
+
+        <div class="popup-title">
+
+            <div class="popup-title-text">
+                ${titleText}
+            </div>
+
+            <button
+                class="popup-close"
+                type="button"
+                aria-label="Close popup"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div class="popup-body">
+
+            ${message.text}
+
+            <div class="popup-tag">
+                GRANDMA HAS SOMETHING TO SAY
+            </div>
+
+        </div>
+
+    `;
+
+
+    document.body.appendChild(
+        popup
+    );
+
+
+    const closeButton =
+        popup.querySelector(
+            ".popup-close"
+        );
+
+
+    closeButton.addEventListener(
+        "click",
+        () => {
+
+            closeGrandmaPopup(
+                popup
+            );
+
+        }
+    );
+
+
+    setTimeout(
+        () => {
+
+            if (
+                document.body.contains(
+                    popup
+                )
+            ) {
+
+                closeGrandmaPopup(
+                    popup
+                );
+
+            }
+
+        },
+        7500 +
+        Math.random() * 5000
+    );
+
+}
+
+
+function closeGrandmaPopup(
+    popup
+) {
+
+    if (
+        popup.classList.contains(
+            "closing"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    popup.classList.add(
+        "closing"
+    );
+
+
+    setTimeout(
+        () => {
+
+            if (
+                popup.parentNode
+            ) {
+
+                popup.parentNode.removeChild(
+                    popup
+                );
+
+            }
+
+            popupCount--;
+
+        },
+        210
+    );
+
+}
+
+
+function scheduleGrandmaPopup() {
+
+    const delay =
+        25000 +
+        Math.random() * 35000;
+
+
+    setTimeout(
+        () => {
+
+            createGrandmaPopup();
+
+            scheduleGrandmaPopup();
+
+        },
+        delay
+    );
+
+}
+
+
+setTimeout(
+    () => {
+
+        createGrandmaPopup();
+
+        scheduleGrandmaPopup();
+
+    },
+    18000 +
+    Math.random() * 12000
+);
+
+
+/* =========================================================
+   ACHIEVEMENTS
+========================================================= */
+
+const achievements = {
+
+    foundSecret: {
+        name: "Curiosity",
+        desc: "Found the secret button.",
+        unlocked: false
+    },
+
+    openedCrash: {
+        name: "Uh Oh",
+        desc: "Opened the fake crash screen.",
+        unlocked: false
+    },
+
+    foundGerald: {
+        name: "Backflip!",
+        desc: "Found Gerald's secret gif.",
+        unlocked: false
+    },
+
+    movedCreature: {
+        name: "Silly Time",
+        desc: "Moved a silly creature around.",
+        unlocked: false
+    },
+
+    playedSong: {
+        name: "Vibing",
+        desc: "Listened to a full song.",
+        unlocked: false
+    },
+
+    madeGrandmaAngry: {
+        name: "Oops",
+        desc: "Made Grandma really mad.",
+        unlocked: false
+    },
+
+    scrolledBottom: {
+        name: "Thorough",
+        desc: "Scrolled all the way down.",
+        unlocked: false
+    },
+
+    metTheOcs: {
+        name: "Yearbook",
+        desc: "Checked out the OC yearbook.",
+        unlocked: false
+    }
+
+};
+
+
+const achievementsList =
+    document.getElementById(
+        "achievementsList"
+    );
+
+const achievementsTab =
+    document.getElementById(
+        "achievementsTab"
+    );
+
+const achievementsPanel =
+    document.getElementById(
+        "achievementsPanel"
+    );
+
+const achievementToast =
+    document.getElementById(
+        "achievementToast"
+    );
+
+
+let achievementToastTimeout =
+    null;
+
+
+function renderAchievements() {
+
+    achievementsList.innerHTML = "";
+
+    Object.values(
+        achievements
+    ).forEach(
+        achievement => {
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+            item.className =
+                "achievement-item" +
+                (
+                    achievement.unlocked ?
+                    " unlocked" :
+                    ""
+                );
+
+            item.innerHTML = `
+
+                <div class="achievement-icon">
+                    ${achievement.unlocked ? "🏆" : "🔒"}
+                </div>
+
+                <div>
+
+                    <div>
+                        <b>
+                            ${achievement.unlocked ? achievement.name : "???"}
+                        </b>
+                    </div>
+
+                    <div>
+                        ${achievement.unlocked ? achievement.desc : "Keep exploring..."}
+                    </div>
+
+                </div>
+
+            `;
+
+            achievementsList.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+
+function showAchievementToast(
+    name
+) {
+
+    clearTimeout(
+        achievementToastTimeout
+    );
+
+    achievementToast.textContent =
+        "🏆 ACHIEVEMENT UNLOCKED: " +
+        name;
+
+    achievementToast.classList.add(
+        "show"
+    );
+
+
+    achievementToastTimeout =
+        setTimeout(
+            () => {
+
+                achievementToast.classList.remove(
+                    "show"
+                );
+
+            },
+            3000
+        );
+
+}
+
+
+function unlockAchievement(
+    id
+) {
+
+    const achievement =
+        achievements[id];
+
+
+    if (
+        !achievement ||
+        achievement.unlocked
+    ) {
+
+        return;
+
+    }
+
+
+    achievement.unlocked =
+        true;
+
+
+    renderAchievements();
+
+    showAchievementToast(
+        achievement.name
+    );
+
+}
+
+
+achievementsTab.addEventListener(
+    "click",
+    () => {
+
+        achievementsPanel.classList.toggle(
+            "show"
+        );
+
+    }
+);
+
+
+renderAchievements();
+
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        if (
+            window.innerHeight +
+            window.scrollY >=
+            document.body.scrollHeight -
+            20
+        ) {
+
+            unlockAchievement(
+                "scrolledBottom"
+            );
+
+        }
+
+    }
+);
+
+
+document
+    .querySelectorAll(
+        ".yearbook-card"
+    )
+    .forEach(
+        card => {
+
+            card.addEventListener(
+                "mouseenter",
+                () => {
+
+                    unlockAchievement(
+                        "metTheOcs"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   CURSOR TRAIL
+========================================================= */
+
+let lastTrailTime = 0;
+
+const trailChars =
+    ["✦", "★", "✧"];
+
+
+document.addEventListener(
+    "pointermove",
+    event => {
+
+        const now =
+            performance.now();
+
+
+        if (
+            now - lastTrailTime < 45
+        ) {
+
+            return;
+
+        }
+
+
+        lastTrailTime = now;
+
+
+        const spark =
+            document.createElement(
+                "span"
+            );
+
+        spark.className =
+            "cursor-spark";
+
+        spark.textContent =
+            trailChars[
+                Math.floor(
+                    Math.random() *
+                    trailChars.length
+                )
+            ];
+
+        spark.style.left =
+            event.clientX + "px";
+
+        spark.style.top =
+            event.clientY + "px";
+
+
+        document.body.appendChild(
+            spark
+        );
+
+
+        requestAnimationFrame(
+            () => {
+
+                spark.classList.add(
+                    "fade"
+                );
+
+            }
+        );
+
+
+        setTimeout(
+            () => {
+
+                if (
+                    spark.parentNode
+                ) {
+
+                    spark.parentNode.removeChild(
+                        spark
+                    );
+
+                }
+
+            },
+            650
+        );
+
+    }
+);
+
+
+/* =========================================================
+   MAKE SURE GRANDMA STARTS IDLE
+========================================================= */
+
+grandmaIdle();
+
+</script>
+
+</body>
+</html>
